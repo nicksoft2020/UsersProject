@@ -1,0 +1,27 @@
+﻿@model IEnumerable<User>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Active</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach(User user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Name</td>
+                <td><input type="checkbox" value="@user.Active"/></td>
+            </tr>
+        }
+    </tbody>
+</table>
