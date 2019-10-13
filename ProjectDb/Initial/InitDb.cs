@@ -17,12 +17,12 @@ namespace ProjectDb.Initial
                     new User
                     {
                         Name = "Kolia",
-                        Active = false
+                        Active = true
                     },
                     new User
                     {
                         Name = "Vika",
-                        Active = false
+                        Active = true
                     },
                     new User
                     {
@@ -37,6 +37,31 @@ namespace ProjectDb.Initial
                     new User
                     {
                         Name = "Nastya",
+                        Active = false
+                    },
+                    new User
+                    {
+                        Name = "Olya",
+                        Active = true
+                    },
+                    new User
+                    {
+                        Name = "Tanya",
+                        Active = true
+                    },
+                    new User
+                    {
+                        Name = "Viktor",
+                        Active = false
+                    },
+                    new User
+                    {
+                        Name = "Vlad",
+                        Active = false
+                    },
+                    new User
+                    {
+                        Name = "Vlada",
                         Active = false
                     }
                     );
