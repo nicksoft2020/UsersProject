@@ -17,6 +17,12 @@ namespace Domain.Interfaces
         /// </summary>
         /// <returns>the list of data</returns>
         Task<IEnumerable<T>> GetAllAsync();
-        
+
+        /// <summary>
+        /// Updating data
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        Task<bool> Update(T item);
     }
 }

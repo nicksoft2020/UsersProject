@@ -11,13 +11,14 @@ using ProjectDb.Storage;
 
 namespace Users.Controllers
 {
+    [Route("api/users")]
     public class HomeController : Controller
     {
         private EFUnitOfWork repository;
 
         public HomeController(ApplicationContext context)
         {
-            if(context != null)
+            if (context != null)
             {
                 repository = new EFUnitOfWork(context);
             }
@@ -27,86 +28,23 @@ namespace Users.Controllers
             }
         }
 
-        // GET: Home
-        public async Task<ActionResult> Index()
+        [HttpGet]
+        public async Task<IEnumerable<User>> Get()
         {
             List<User> users = (List<User>) await repository.Users.GetAllAsync();
-            return View(users);
+            return users;
         }
 
-        // GET: Home/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: Home/Create
-        public ActionResult Create()
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody]User user)
         {
-            return View();
-        }
-
-        // POST: Home/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                await repository.Users.Update(user);
+                return Ok(user);
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Home/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Home/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Home/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Home/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return BadRequest(ModelState);
         }
     }
 }
