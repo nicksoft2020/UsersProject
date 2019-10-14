@@ -46,8 +46,5 @@ namespace Users.Controllers
             }
             return BadRequest(ModelState);
         }
-
-
-
     }
 }
