@@ -32,7 +32,7 @@ namespace Users.Controllers
         }
 
         /// <summary>
-        /// Getting the list of users from database.
+        /// Getting the flist of users from database.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
