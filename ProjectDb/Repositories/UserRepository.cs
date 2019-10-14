@@ -36,5 +36,21 @@ namespace ProjectDb.Repositories
         {
             return await db.Users.ToListAsync();
         }
+
+        /// <summary>
+        /// Updating data
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public async Task<bool> Update(User item)
+        {
+            if(item != null)
+            {
+                db.Entry(item).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
     }
 }
