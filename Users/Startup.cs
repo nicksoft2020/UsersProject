@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +34,10 @@ namespace Users
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddNodeServices(options =>
+            {
+                options.ProjectPath = "Path/That/Doesnt/Exist";
+            });
             services.AddDbContext<ApplicationContext>(option
                 => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
@@ -50,6 +55,11 @@ namespace Users
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                // добавляем сборку через webpack
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                {
+                    HotModuleReplacement = true
+                });
             }
             else
             {
@@ -57,6 +67,7 @@ namespace Users
                 app.UseHsts();
             }
 
+            app.UseDefaultFiles();
             app.UseStatusCodePages();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
