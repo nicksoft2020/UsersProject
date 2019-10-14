@@ -11,10 +11,13 @@ using ProjectDb.Storage;
 
 namespace Users.Controllers
 {
+    /// <summary>
+    /// This is a class which manages application
+    /// </summary>
     [Route("api/users")]
     public class HomeController : Controller
     {
-        private EFUnitOfWork repository;
+        private EFUnitOfWork repository;    // Repository value.
 
         public HomeController(ApplicationContext context)
         {
@@ -28,6 +31,10 @@ namespace Users.Controllers
             }
         }
 
+        /// <summary>
+        /// Getting the list of users from database.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IEnumerable<User>> Get()
         {
@@ -35,7 +42,12 @@ namespace Users.Controllers
             return users;
         }
 
-
+        /// <summary>
+        /// Updating user in database.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody]User user)
         {

@@ -13,17 +13,21 @@ import { User } from './users';
 var AppComponent = /** @class */ (function () {
     function AppComponent(dataService) {
         this.dataService = dataService;
-        this.total = 0;
-        this.active = 0;
-        this.user = new User();
+        this.total = 0; // Total users.
+        this.active = 0; // Active users.
+        this.user = new User(); // The value of user.
     }
+    // Initialization data.
     AppComponent.prototype.ngOnInit = function () {
         this.loadUsers();
     };
+    // Finding the coutn of total 
+    // and active users.
     AppComponent.prototype.setUsers = function () {
         this.total = this.users.length;
         this.getActiveUsers();
     };
+    //  Getting active users.
     AppComponent.prototype.getActiveUsers = function () {
         this.active = 0;
         for (var _i = 0, _a = this.users; _i < _a.length; _i++) {
@@ -33,17 +37,20 @@ var AppComponent = /** @class */ (function () {
             }
         }
     };
+    // Loading users from database.
     AppComponent.prototype.loadUsers = function () {
         var _this = this;
         this.dataService.getUsers()
             .subscribe(function (data) { return _this.users = data; });
     };
+    // Saving modified user.
     AppComponent.prototype.save = function () {
         var _this = this;
         this.dataService.updateUser(this.user)
             .subscribe(function (data) { return _this.loadUsers(); });
         this.user = new User();
     };
+    // Updating data.
     AppComponent.prototype.changeStatus = function (u) {
         this.user = u;
         this.user.active = !this.user.active;

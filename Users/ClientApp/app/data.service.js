@@ -14,9 +14,11 @@ var DataService = /** @class */ (function () {
         this.http = http;
         this.url = "api/users";
     }
+    // Getting the list of users from home controller.
     DataService.prototype.getUsers = function () {
         return this.http.get(this.url);
     };
+    // Updating users.
     DataService.prototype.updateUser = function (user) {
         return this.http.put(this.url + '/' + user.id, user);
     };
